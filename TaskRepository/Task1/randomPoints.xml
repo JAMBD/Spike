@@ -1,0 +1,32 @@
+<Taems>
+	<Task id="T0" name="Police" qaf="SumAll">
+		<Method id="P0M0" name="TestPointA0" Quality="408" Duration="10" XCoord="217" YCoord="153"></Method>
+		<Method id="P0M1" name="TestPointA1" Quality="790" Duration="10" XCoord="201" YCoord="274"></Method>
+		<Method id="P0M2" name="TestPointA2" Quality="199" Duration="10" XCoord="219" YCoord="251"></Method>
+	</Task>
+	<Task id="T0" name="Ambulance" qaf="SumAll">
+		<Method id="A0M0" name="TestPointB0" Quality="506" Duration="10" XCoord="496" YCoord="316"></Method>
+		<Method id="A0M1" name="TestPointB1" Quality="451" Duration="10" XCoord="380" YCoord="289"></Method>
+		<Method id="A0M2" name="TestPointB2" Quality="539" Duration="10" XCoord="417" YCoord="279"></Method>
+	</Task>
+	<Task id="T1" name="Police" qaf="SumAll">
+		<Method id="P1M0" name="TestPointA3" Quality="109" Duration="10" XCoord="201" YCoord="96"></Method>
+		<Method id="P1M1" name="TestPointA4" Quality="568" Duration="10" XCoord="244" YCoord="122"></Method>
+		<Method id="P1M2" name="TestPointA5" Quality="978" Duration="10" XCoord="220" YCoord="265"></Method>
+	</Task>
+	<Task id="T1" name="Ambulance" qaf="SumAll">
+		<Method id="A1M0" name="TestPointB3" Quality="588" Duration="10" XCoord="466" YCoord="187"></Method>
+		<Method id="A1M1" name="TestPointB4" Quality="324" Duration="10" XCoord="449" YCoord="131"></Method>
+		<Method id="A1M2" name="TestPointB5" Quality="175" Duration="10" XCoord="513" YCoord="327"></Method>
+	</Task>
+	<Task id="T2" name="Police" qaf="SumAll">
+		<Method id="P2M0" name="TestPointA6" Quality="773" Duration="10" XCoord="224" YCoord="142"></Method>
+		<Method id="P2M1" name="TestPointA7" Quality="221" Duration="10" XCoord="86" YCoord="112"></Method>
+		<Method id="P2M2" name="TestPointA8" Quality="709" Duration="10" XCoord="145" YCoord="214"></Method>
+	</Task>
+	<Task id="T2" name="Ambulance" qaf="SumAll">
+		<Method id="A2M0" name="TestPointB6" Quality="230" Duration="10" XCoord="424" YCoord="72"></Method>
+		<Method id="A2M1" name="TestPointB7" Quality="898" Duration="10" XCoord="435" YCoord="152"></Method>
+		<Method id="A2M2" name="TestPointB8" Quality="567" Duration="10" XCoord="394" YCoord="53"></Method>
+	</Task>
+</Taems>

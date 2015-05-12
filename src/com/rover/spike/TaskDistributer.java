@@ -28,7 +28,7 @@ public class TaskDistributer {
 	 */
 	public static void main(String[] args) {
 		LinkedList<String> taskRepoFldr = new LinkedList<String>();
-		int qos             = 2;
+		int qos             = 1;
 		String broker       = "tcp://192.168.0.100:1883";
 		String clientId     = "taskDist";
 		int batches			= 1;
