@@ -1,6 +1,0 @@
-<Taems>
-	<Task id="T1" name="PickPatient" qaf="SumAll" >
-		<Method id="A1M1T1" name="PickFromHouse" Quality="500" Duration="10" XCoord="200" YCoord="200"></Method>
-		<Method id="A1M1T2" name="PickFromHouse" Quality="500" Duration="10" XCoord="250" YCoord="150"></Method>
-	</Task>
-</Taems>
