@@ -6,9 +6,6 @@ import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.Set;
 
-import messages.Complete;
-
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -32,6 +29,8 @@ public class TaskDistributer {
 		String broker       = "tcp://192.168.0.100:1883";
 		String clientId     = "taskDist";
 		int batches			= 1;
+
+		String output = "rlt.txt";
         MemoryPersistence persistence = new MemoryPersistence();
 		//input args
 		for(int i=0;i<args.length;i++){
@@ -51,7 +50,14 @@ public class TaskDistributer {
 					break;
 				}
 			}
-
+			if(args[i].compareTo("-r")==0){
+				if(++i < args.length){
+					output = args[i++];
+				}else{
+					printUsage();
+					break;
+				}
+			}
 			if(args[i].compareTo("-n")==0){
 				if(++i < args.length){
 					batches = Integer.parseInt(args[i++]);
@@ -70,12 +76,14 @@ public class TaskDistributer {
 				}
 				break;
 			}
+			
 		}
 		if(taskRepoFldr.isEmpty()){
 			System.err.print("No input folders\n");
 			System.exit(-1);
 		}
-			
+
+		Reciever r = new Reciever(output);
 		try {
 
             MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
@@ -84,11 +92,16 @@ public class TaskDistributer {
             System.out.println("Connecting to broker: "+broker);
             sampleClient.connect(connOpts);
             System.out.println("Connected");
+			sampleClient.setCallback(r);
+            sampleClient.subscribe("complete");
+            sampleClient.subscribe("gps/0");
+            sampleClient.subscribe("gps/1");
+            sampleClient.subscribe("tasklist");
     		for(int i=0;i<batches;i++){
     			String current = taskRepoFldr.pop();
     			TaskRepository taskBatch = new TaskRepository(current);
     			Set<String> tasksIds = taskBatch.taskDefinitions.keySet();
-                
+                r.registerRepo(taskBatch);
                 for(String task : tasksIds){
                 	ByteArrayOutputStream b = new ByteArrayOutputStream();
                 	try {
@@ -108,10 +121,6 @@ public class TaskDistributer {
                 	System.out.println("Message published");
                 }
                 
-
-    			sampleClient.setCallback(taskBatch);
-                sampleClient.subscribe("complete");
-                
                 while(!taskBatch.complete()){
                 	try {
                 		Thread.sleep(1000);
@@ -120,11 +129,9 @@ public class TaskDistributer {
                 	}
                 }
                 
-                sampleClient.unsubscribe("complete");
-                sampleClient.setCallback(null);
     			taskRepoFldr.addLast(current);
     		}
-            
+    		r.close();
             sampleClient.disconnect();
             System.out.println("Disconnected");
             System.exit(0);
@@ -139,5 +146,7 @@ public class TaskDistributer {
 		
 
 	}
+	
+	
 
 }

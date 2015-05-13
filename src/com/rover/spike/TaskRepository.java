@@ -30,7 +30,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class TaskRepository implements MqttCallback {
+public class TaskRepository {
 
 	boolean debugFlag = true;
 	String repositoryFolderPath = "";
@@ -143,25 +143,6 @@ public class TaskRepository implements MqttCallback {
 		return method;
 	}
 
-	@Override
-	public void connectionLost(Throwable arg0) {
-	}
-
-	@Override
-	public void deliveryComplete(IMqttDeliveryToken arg0) {
-	}
-
-	@Override
-	public void messageArrived(String arg0, MqttMessage mesg) throws Exception {		
-		ByteArrayInputStream b1 = new ByteArrayInputStream(mesg.getPayload());
-		ObjectInputStream o1 = new ObjectInputStream(b1);
-		Object unknownMsg = o1.readObject();
-
-		if (unknownMsg.getClass() == Complete.class) {
-			Complete done = (Complete) unknownMsg;
-			markDone(done.taskId);
-		} else {
-			System.out.print("Spike: Unknown mqtt message\n");
-		}
-	}
+	
+	
 }
